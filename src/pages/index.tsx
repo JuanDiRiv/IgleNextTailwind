@@ -2,9 +2,6 @@ import React from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import VideoDisplay from '@/components/VideoDisplay/VideoDisplay'
 import Head from 'next/head'
-import Link from 'next/link'
-import { Clock, Navigation } from '@geist-ui/icons'
-
 
 
 function Home() {
