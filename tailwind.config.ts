@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         customGold: '#a98d51',
+        greenDark: '#192d2c'
       }
     },
   },
