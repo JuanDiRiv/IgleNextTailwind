@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import VideoDisplay from '@/components/VideoDisplay/VideoDisplay'
 import Head from 'next/head'
+import About from '@/components/About/About'
 
 
 function Home() {
@@ -35,6 +36,9 @@ function Home() {
       <main >
         <div className='bg-greenDark p-4 pt-10 pb-10 h-full md:p-16 lg:p-32'>
         <VideoDisplay url={url}/>
+        </div>
+        <div className='bg-customGray'>
+          <About/>
         </div>
 
       </main>
