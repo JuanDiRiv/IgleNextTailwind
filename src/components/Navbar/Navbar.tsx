@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className={classNames('fixed w-full z-10 transition-colors duration-300', {
+    <nav className={classNames('fixed w-full z-20 transition-colors duration-300', {
       'bg-transparent': !isScrolled && !isOpen,
       'bg-greenDark': isScrolled || isOpen,
     })}>

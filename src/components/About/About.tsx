@@ -17,9 +17,8 @@ const Section: React.FC<SectionProps> = ({ imageSrc, imageAlt, title, descriptio
             <Image
                 src={imageSrc}
                 alt={imageAlt}
-                layout="fill"
-                objectFit="cover"
-                className='rounded-lg'
+                fill={true}
+                className='rounded-lg object-cover'
             />
         </div>
         <div className='pt-4 w-full lg:pt-0'>

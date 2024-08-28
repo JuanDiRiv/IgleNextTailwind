@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar/Navbar'
 import VideoDisplay from '@/components/VideoDisplay/VideoDisplay'
 import Head from 'next/head'
 import About from '@/components/About/About'
+import VerseReference from '@/components/VerseReference/VerseReference'
 
 
 function Home() {
@@ -39,6 +40,19 @@ function Home() {
         </div>
         <div className='bg-customGray'>
           <About/>
+        </div>
+
+
+        <div className='relative flex items-center justify-center bg-center bg-cover bg-[url("/bg-vers.jpg")] p-12'>
+          <div className='absolute inset-0 bg-gradient-to-r from-[rgba(25,45,44,0.8)] to-[rgba(25,45,44,0.8)]'></div>
+          <VerseReference
+            biblicalReference='Psalm 55:22'
+            verse='Give your burdens to the Lord, and he will take care of you'
+          />
+
+
+
+
         </div>
 
       </main>
