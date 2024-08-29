@@ -4,6 +4,7 @@ import VideoDisplay from '@/components/VideoDisplay/VideoDisplay'
 import Head from 'next/head'
 import About from '@/components/About/About'
 import VerseReference from '@/components/VerseReference/VerseReference'
+import ChurchCommunity from '@/components/ChurchCommunity/ChurchCommunity'
 
 
 function Home() {
@@ -22,7 +23,7 @@ function Home() {
               <div className='flex flex-col items-center justify-center h-full text-white lg:w-5/12 md:w-80 lg:p-16'>
                 <h1 className='text-5xl font-bold pb-4 lg:pb-4 lg:text-8xl'>THE WORD OF GOD</h1>
                 <div className='w-full h-1 bg-white size mt-1 mb-3' />
-                <p className='text-lg pb-6 font-light'>Dear friends, now we are children of God, and what we will be has not yet been made known. But we know that when Christ appears, we shall be like him, for we shall see him as he is. All who have this hope in him purify themselves, just as he is pure. 1 John 3:2-3  </p>
+                <p className='text-lg pb-6 font-light '>Dear friends, now we are children of God, and what we will be has not yet been made known. But we know that when Christ appears, we shall be like him, for we shall see him as he is. All who have this hope in him purify themselves, just as he is pure. 1 John 3:2-3  </p>
                 <div className='w-full text-center md:text-left lg:text-left'>
                   <button className='inline-block bg-customGold text-white py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors duration-300'>
                     Get Started
@@ -49,15 +50,14 @@ function Home() {
             biblicalReference='Psalm 55:22'
             verse='Give your burdens to the Lord, and he will take care of you'
           />
-
-
-
-
+        </div>
+        <div className='bg-customGray text-center p-6 pt-10 lg:pt-20'>
+          <ChurchCommunity/>
         </div>
 
       </main>
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      
     </>
   )
 }

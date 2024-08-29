@@ -26,7 +26,7 @@ function VideoDisplay({ url }: VideoDisplayProps) {
       </div>
       <div className='flex-1 p-8 bg-white relative'>
         <h2 className='font-bold mb-4 text-2xl'>Reunión General</h2>
-        <p className='text-left font-light mb-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est porro fugit laudantium voluptatem doloribus dignissimos, fugiat odit ipsum commodi labore.</p>
+        <p className='text-left font-light mb-6 text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est porro fugit laudantium voluptatem doloribus dignissimos, fugiat odit ipsum commodi labore.</p>
         <div className='font-light'>
           <div className='flex items-center gap-2 mt-4'>
             <CiClock1 className='flex-shrink-0 w-6 h-6 text-gray-600' />
