@@ -5,7 +5,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 function ChurchCommunity() {
     return (
-        <div className='text-center mx-auto w-[88%] md:w-[70%] lg:w-[60%]'>
+        <div className='text-center mx-auto  md:w-[70%] lg:w-[60%]'>
             <h2 className='font-bold text-2xl lg:text-4xl'>Church Community</h2>
             <p className='font-light pt-8 lg:text-lg pb-12 '>
                 For Jesus said, Go, sell your possessions and give to the poor, and you will have treasure in heaven.” Truly he said and blindly we follow the words

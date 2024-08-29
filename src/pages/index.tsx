@@ -5,6 +5,7 @@ import Head from 'next/head'
 import About from '@/components/About/About'
 import VerseReference from '@/components/VerseReference/VerseReference'
 import ChurchCommunity from '@/components/ChurchCommunity/ChurchCommunity'
+import OurPastors from '@/components/OurPastors/OurPastors'
 
 
 function Home() {
@@ -54,6 +55,13 @@ function Home() {
         <div className='bg-customGray text-center p-6 pt-10 lg:pt-20'>
           <ChurchCommunity/>
         </div>
+        <div>
+
+          <div className='bg-greenDark text-white p-4 pt-16 pb-10 h-full md:p-16 lg:p-32 text-center'>
+            <OurPastors/>
+          </div>
+        </div>
+        
 
       </main>
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
