@@ -6,6 +6,7 @@ import About from '@/components/About/About'
 import VerseReference from '@/components/VerseReference/VerseReference'
 import ChurchCommunity from '@/components/ChurchCommunity/ChurchCommunity'
 import OurPastors from '@/components/OurPastors/OurPastors'
+import Location from '@/components/Location/Location'
 
 
 function Home() {
@@ -32,19 +33,16 @@ function Home() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </header>
       <main >
         <div className='bg-greenDark p-4 pt-10 pb-10 h-full md:p-16 lg:p-32'>
-        <VideoDisplay url={url}/>
+          <VideoDisplay url={url} />
         </div>
         <div className='bg-customGray'>
-          <About/>
+          <About />
         </div>
-
-
         <div className='relative flex items-center justify-center bg-center bg-cover bg-[url("/bg-vers.jpg")] p-12'>
           <div className='absolute inset-0 bg-gradient-to-r from-[rgba(25,45,44,0.8)] to-[rgba(25,45,44,0.8)]'></div>
           <VerseReference
@@ -53,19 +51,31 @@ function Home() {
           />
         </div>
         <div className='bg-customGray text-center p-6 pt-10 lg:pt-20'>
-          <ChurchCommunity/>
+          <ChurchCommunity />
         </div>
         <div>
 
           <div className='bg-greenDark text-white p-4 pt-16 pb-10 h-full md:p-16 lg:p-32 text-center'>
-            <OurPastors/>
+            <OurPastors />
           </div>
         </div>
-        
+        <div>
+          <div className='bg-customGray text-center p-6 pt-10 pb-12 lg:pt-16'>
+
+            <h2 className='text-2xl font-bold'>Location</h2>
+            <p className='font-light pt-4 w-[80%] mx-auto'>Check our location to visit us. Meanwhile, feel free to call us for more info.</p>
+          </div>
+          <div className='' >
+            <Location />
+
+
+          </div>
+        </div>
+
 
       </main>
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      
+
     </>
   )
 }
