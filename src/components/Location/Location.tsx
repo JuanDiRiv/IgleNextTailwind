@@ -10,7 +10,6 @@ function Location() {
         loading="lazy"
     ></iframe>
     <div>
-        <h2>Iglesia Cristiana Rios del Amor de Dios</h2>
         <div></div>
     </div>
 </div>

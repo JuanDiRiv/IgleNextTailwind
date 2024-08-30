@@ -7,7 +7,7 @@ function ChurchCommunity() {
     return (
         <div className='text-center mx-auto  md:w-[70%] lg:w-[60%]'>
             <h2 className='font-bold text-2xl lg:text-4xl'>Church Community</h2>
-            <p className='font-light pt-8 lg:text-lg pb-12 '>
+            <p className='font-light pt-8  pb-12 '>
                 For Jesus said, Go, sell your possessions and give to the poor, and you will have treasure in heaven.” Truly he said and blindly we follow the words
                 of the Savior. Our church community constantly contributes to the church fund that is being risen for charity purposes. In the meantime, our group
                 of faithful volunteers organizes fundraising events to help the poor with essentials. For we know that whoever is kind to the poor lends to the Lord,

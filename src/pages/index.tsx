@@ -7,6 +7,7 @@ import VerseReference from '@/components/VerseReference/VerseReference'
 import ChurchCommunity from '@/components/ChurchCommunity/ChurchCommunity'
 import OurPastors from '@/components/OurPastors/OurPastors'
 import Location from '@/components/Location/Location'
+import FooterComponent from '@/components/FooterComponent/FooterComponent'
 
 
 function Home() {
@@ -20,7 +21,7 @@ function Home() {
         {/* Contenido del header */}
         <Navbar />
         <div className='pt-12 lg:pt-0'>
-          <div className=''>
+          <div>
             <div className='p-12'>
               <div className='flex flex-col items-center justify-center h-full text-white lg:w-5/12 md:w-80 lg:p-16'>
                 <h1 className='text-5xl font-bold pb-4 lg:pb-4 lg:text-8xl'>THE WORD OF GOD</h1>
@@ -37,10 +38,10 @@ function Home() {
         </div>
       </header>
       <main >
-        <div className='bg-greenDark p-4 pt-10 pb-10 h-full md:p-16 lg:p-32'>
+        <div className='bg-greenDark p-4 pt-10 pb-10 h-full md:p-16 lg:p-32 text-lg  '>
           <VideoDisplay url={url} />
         </div>
-        <div className='bg-customGray'>
+        <div className='bg-customGray text-lg '>
           <About />
         </div>
         <div className='relative flex items-center justify-center bg-center bg-cover bg-[url("/bg-vers.jpg")] p-12'>
@@ -50,32 +51,38 @@ function Home() {
             verse='Give your burdens to the Lord, and he will take care of you'
           />
         </div>
-        <div className='bg-customGray text-center p-6 pt-10 lg:pt-20'>
+        <div className='bg-customGray text-center p-6 pt-10 lg:pt-20 text-lg  '>
           <ChurchCommunity />
         </div>
         <div>
 
-          <div className='bg-greenDark text-white p-4 pt-16 pb-10 h-full md:p-16 lg:p-32 text-center'>
+          <div className='bg-greenDark text-white p-4 pt-16 pb-10 h-full md:p-16 lg:p-32 text-center text-lg '>
             <OurPastors />
           </div>
         </div>
         <div>
-          <div className='bg-customGray text-center p-6 pt-10 pb-12 lg:pt-16'>
+          <div className='bg-customGray text-center p-6 pt-10 pb-12 lg:pt-16 text-lg '>
 
             <h2 className='text-2xl font-bold'>Location</h2>
             <p className='font-light pt-4 w-[80%] mx-auto'>Check our location to visit us. Meanwhile, feel free to call us for more info.</p>
           </div>
           <div className='' >
             <Location />
-
-
           </div>
+        </div>
+        <div className='relative flex items-center justify-center bg-center bg-cover bg-[url("/verse2.jpg")] p-12'>
+          <div className='absolute inset-0 bg-gradient-to-r from-[rgba(25,45,44,0.8)] to-[rgba(25,45,44,0.8)]'></div>
+          <VerseReference
+            biblicalReference='Luke 1:37'
+            verse='For with God nothing will be impossible'
+          />
         </div>
 
 
       </main>
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
+      <footer className='text-lg'>
+        <FooterComponent />
+      </footer>
     </>
   )
 }
