@@ -12,11 +12,15 @@ const SignIn = () => {
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
-      sessionStorage.setItem('user', 'true'); // Convert boolean to string
-      setEmail('');
-      setPassword('');
-      router.push('/');
+      if (res?.user) {
+        const accessToken = res.user.stsTokenManager.accessToken;
+        console.log(accessToken, "accessToken");
+        sessionStorage.setItem('user', 'true'); // Convert boolean to string
+        sessionStorage.setItem('accessToken', accessToken); // Store access token
+        setEmail('');
+        setPassword('');
+        router.push('/admin');
+      }
     } catch (e) {
       console.error(e);
     }

@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 function Admin() {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  console.log(user);
+  // console.log(user);
   
 
   useEffect(() => {
@@ -25,6 +25,7 @@ function Admin() {
           signOut(auth);
           if (typeof window !== 'undefined') {
             sessionStorage.removeItem('user');
+            sessionStorage.removeItem('accessToken');
           }
         }}
       >
