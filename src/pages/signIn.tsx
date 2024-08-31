@@ -24,7 +24,7 @@ const SignIn = () => {
   const [user] = useAuthState(auth) as unknown as [CustomUser | null];
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
-  const [signOut] = useSignOut(auth);
+
 
   useEffect(() => {
     setIsClient(true);
@@ -34,7 +34,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (userToken) {
-      router.push('/admin');
+      router.push('/admin/dashboard');
     }
   }, [userToken, router]);
 
@@ -51,7 +51,7 @@ const SignIn = () => {
       if (user?.stsTokenManager?.accessToken) {
         sessionStorage.setItem('accessToken', user.stsTokenManager.accessToken);
         setFormState({ email: '', password: '', loading: false, error: null });
-        setTimeout(() => router.push('/admin'), 1000);
+        setTimeout(() => router.push('/admin/dashboard'), 1000);
       } else {
         setTimeout(() => setFormState((prevState) => ({ ...prevState, error: 'Failed to sign in. Please check your credentials and try again.' })), 1000);
       }
@@ -69,7 +69,7 @@ const SignIn = () => {
 
   return (
     <>
-      {!userToken ? (
+      
         <div className="min-h-screen flex items-center justify-center bg-greenDark">
           <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-96">
             <h1 className="text-white text-2xl mb-5">Sign In</h1>
@@ -108,25 +108,7 @@ const SignIn = () => {
             )}
           </div>
         </div>
-      ) : (
-        <div className="min-h-screen flex items-center justify-center bg-greenDark text-center">
-          <div className="bg-gray-800 p-11 rounded-lg shadow-xl w-96">
-            <h1 className="text-white text-2xl">Ya Iniciaste sesion</h1>
-            <button
-              onClick={() => {
-                signOut();
-                if (typeof window !== 'undefined') {
-                  sessionStorage.removeItem('user');
-                  sessionStorage.removeItem('accessToken');
-                }
-              }}
-              className="bg-red-500 text-white p-2 w-full rounded mt-4"
-            >
-              Log out
-            </button>
-          </div>
-        </div>
-      )}
+     
     </>
   );
 };

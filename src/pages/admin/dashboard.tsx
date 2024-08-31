@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/utils/firebase/config';
-import {  User } from 'firebase/auth'; // Adjust the import according to your setup
+import { User } from 'firebase/auth'; // Adjust the import according to your setup
 import { signOut } from 'firebase/auth';
+import Layout from '@/components/layout/Layout';
 
 // Extend the User type to include stsTokenManager
 interface CustomUser extends User {
@@ -12,7 +13,7 @@ interface CustomUser extends User {
   };
 }
 
-function Admin() {
+function Dashboard() {
   const [user] = useAuthState(auth) as unknown as [CustomUser | null];
   const router = useRouter();
 
@@ -25,20 +26,13 @@ function Admin() {
   }, [user, router]);
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          signOut(auth);
-          if (typeof window !== 'undefined') {
-            sessionStorage.removeItem('user');
-            sessionStorage.removeItem('accessToken');
-          }
-        }}
-      >
-        Log out
-      </button>
-    </div>
+    <Layout>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <h1 className="text-2xl font-bold">Welcome to the Admin Dashboard</h1>
+        
+      </div>
+    </Layout>
   );
 }
 
-export default Admin;
+export default Dashboard;
