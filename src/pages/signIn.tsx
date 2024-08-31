@@ -1,16 +1,16 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useEffect, useState } from 'react';
+import { useSignInWithEmailAndPassword, useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from '@/utils/firebase/config';
 import { useRouter } from 'next/navigation';
 import { User } from 'firebase/auth';
 import { ClipLoader } from 'react-spinners';
-import { useAuthState } from 'react-firebase-hooks/auth';
+
 interface CustomUser extends User {
-  stsTokenManager: {
+  stsTokenManager?: {
     accessToken: string;
   };
 }
+
 const SignIn = () => {
   const [formState, setFormState] = useState({
     email: '',
@@ -20,10 +20,23 @@ const SignIn = () => {
   });
 
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-  const [userToken , setUserToken] = useState<string | null>(null);
+  const [userToken, setUserToken] = useState<string | null>(null);
   const [user] = useAuthState(auth) as unknown as [CustomUser | null];
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+  const [signOut] = useSignOut(auth);
 
+  useEffect(() => {
+    setIsClient(true);
+    const token = sessionStorage.getItem('accessToken');
+    setUserToken(token ?? null);
+  }, []);
+
+  useEffect(() => {
+    if (userToken) {
+      router.push('/admin');
+    }
+  }, [userToken, router]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,58 +63,70 @@ const SignIn = () => {
     }
   };
 
-  return (
-  <>
-
-  {
-    user === null ? 
-    <div className="min-h-screen flex items-center justify-center bg-greenDark">
-      <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-96">
-        <h1 className="text-white text-2xl mb-5">Sign In</h1>
-        <input
-          type="email"
-          name="email"
-          value={formState.email}
-          onChange={handleInputChange}
-          placeholder="Email"
-          className="mb-4 p-2 w-full"
-        />
-        <input
-          type="password"
-          name="password"
-          value={formState.password}
-          onChange={handleInputChange}
-          placeholder="Password"
-          className="mb-4 p-2 w-full"
-        />
-        <button
-          onClick={handleSignIn}
-          className="bg-blue-500 text-white p-2 w-full rounded"
-          disabled={formState.loading}
-        >
-          {formState.loading ? 'Signing In...' : 'Sign In'}
-        </button>
-        {formState.loading && (
-          <div className="flex justify-center mt-4">
-            <ClipLoader color="#ffffff" loading={formState.loading} size={35} />
-          </div>
-        )}
-        {formState.error && (
-          <div className="text-red-500 mt-4">
-            {formState.error}
-          </div>
-        )}
-      </div>
-    </div>
-    : 
-    <div className="min-h-screen flex items-center justify-center bg-greenDark text-center">
-      <div className="bg-gray-800 p-11 rounded-lg shadow-xl w-96">
-        <h1 className="text-white text-2xl ">Ya Iniciaste sesion </h1>
-       
-      </div>
-    </div>
+  if (!isClient) {
+    return null; // Render nothing on the server
   }
-    
+
+  return (
+    <>
+      {!userToken ? (
+        <div className="min-h-screen flex items-center justify-center bg-greenDark">
+          <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-96">
+            <h1 className="text-white text-2xl mb-5">Sign In</h1>
+            <input
+              type="email"
+              name="email"
+              value={formState.email}
+              onChange={handleInputChange}
+              placeholder="Email"
+              className="mb-4 p-2 w-full"
+            />
+            <input
+              type="password"
+              name="password"
+              value={formState.password}
+              onChange={handleInputChange}
+              placeholder="Password"
+              className="mb-4 p-2 w-full"
+            />
+            <button
+              onClick={handleSignIn}
+              className="bg-blue-500 text-white p-2 w-full rounded"
+              disabled={formState.loading}
+            >
+              {formState.loading ? 'Signing In...' : 'Sign In'}
+            </button>
+            {formState.loading && (
+              <div className="flex justify-center mt-4">
+                <ClipLoader color="#ffffff" loading={formState.loading} size={35} />
+              </div>
+            )}
+            {formState.error && (
+              <div className="text-red-500 mt-4">
+                {formState.error}
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className="min-h-screen flex items-center justify-center bg-greenDark text-center">
+          <div className="bg-gray-800 p-11 rounded-lg shadow-xl w-96">
+            <h1 className="text-white text-2xl">Ya Iniciaste sesion</h1>
+            <button
+              onClick={() => {
+                signOut();
+                if (typeof window !== 'undefined') {
+                  sessionStorage.removeItem('user');
+                  sessionStorage.removeItem('accessToken');
+                }
+              }}
+              className="bg-red-500 text-white p-2 w-full rounded mt-4"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
