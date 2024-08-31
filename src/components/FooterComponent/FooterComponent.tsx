@@ -8,7 +8,7 @@ function FooterComponent() {
 
             <FloatingWhatsApp
                 notificationDelay={2}
-                avatar={"Logo iglesia"}
+                avatar={""}
                 darkMode={true}
                 phoneNumber="+573114852071"
                 chatMessage="Hola, ¿En qué podemos ayudarte?"

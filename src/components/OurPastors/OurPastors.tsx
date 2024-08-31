@@ -14,7 +14,7 @@ function OurPastors() {
                     <Image
                         className='object-cover'
                         src={"https://hosting.renderforestsites.com/images/5699226/135134/95b4d624642a30e9b738fed7d1416ebb.jpg"}
-                        layout="fill"
+                        fill
                         alt='Pastor 1'
                     />
                 </div>

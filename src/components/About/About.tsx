@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import React from 'react'
-import { IoIosArrowForward } from "react-icons/io";
+import Image from 'next/image';
+import React from 'react';
+import { IoIosArrowForward } from 'react-icons/io';
 
 interface SectionProps {
     imageSrc: string;
@@ -18,6 +18,7 @@ const Section: React.FC<SectionProps> = ({ imageSrc, imageAlt, title, descriptio
                 src={imageSrc}
                 alt={imageAlt}
                 fill={true}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className='rounded-lg object-cover'
             />
         </div>
@@ -40,18 +41,18 @@ function About() {
                 imageAlt="About Church"
                 title="About Our Church"
                 description="The Word of God church was started by Pastor Braxton Capel in 2012. With over 200 members we grow into one of the biggest communities in LA. With this said, you are welcome to join a place where everyone is talking to God and about God."
-                buttonText="Visit Us"
+                buttonText="Learn More"
             />
             <Section
                 imageSrc="/toExpect.jpg"
-                imageAlt="To Expect"
-                title="What to expect"
-                description="You can expect an environment with warm hearts and pure souls. We pray, we lough, we cry, we have fun and we help each other. You can expect daily sermons, events, special dinners, unlimited snacks and coffee. And what the best, expect to feel Gods spirit around you."
-                buttonText="Join Us"
+                imageAlt="What to Expect"
+                title="What to Expect"
+                description="When you come to our church, you can expect a friendly welcome, uplifting worship, and a message that will inspire you to grow in your faith."
+                buttonText="Find Out More"
                 reverse
             />
         </div>
-    )
+    );
 }
 
 export default About;

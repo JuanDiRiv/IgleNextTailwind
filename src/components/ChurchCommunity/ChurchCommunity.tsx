@@ -15,7 +15,7 @@ function ChurchCommunity() {
             </p>
             
 
-            <Carousel  showThumbs={true} autoPlay infiniteLoop>
+            <Carousel  showThumbs={false} autoPlay infiniteLoop>
 
                 <div>
                     <Image className='filter grayscale' width={800} height={800} src="https://hosting.renderforestsites.com/images/5699226/135134/284fbfc4cc2e05fb0fe23adc053ac610.jpg" alt="Image 1" />
