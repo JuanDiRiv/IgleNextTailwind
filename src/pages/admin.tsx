@@ -21,9 +21,9 @@ function Admin() {
     const userSession = typeof window !== 'undefined' ? sessionStorage.getItem('accessToken') : null;
     const token = sessionStorage.getItem('accessToken');
     const userToken = user?.stsTokenManager?.accessToken;
-    
-
-    if (userToken !== token) {
+    console.log(userToken );
+    if (!token) {
+      
       router.push('/signIn');
     }
   }, [user, router]);

@@ -16,11 +16,13 @@ const SignIn = () => {
 
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
+  const [userToken , setUserToken] = useState<string | null>(null);
 
   useEffect(() => {
     const accessToken = sessionStorage.getItem('accessToken');
     if (accessToken) {
-      router.push('/admin');
+      setUserToken(accessToken);
+     
     }
   }, [router]);
 
@@ -50,6 +52,10 @@ const SignIn = () => {
   };
 
   return (
+  <>
+
+  {
+    !userToken ? 
     <div className="min-h-screen flex items-center justify-center bg-greenDark">
       <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-96">
         <h1 className="text-white text-2xl mb-5">Sign In</h1>
@@ -88,6 +94,16 @@ const SignIn = () => {
         )}
       </div>
     </div>
+    : 
+    <div className="min-h-screen flex items-center justify-center bg-greenDark text-center">
+      <div className="bg-gray-800 p-11 rounded-lg shadow-xl w-96">
+        <h1 className="text-white text-2xl ">Ya Iniciaste sesion </h1>
+       
+      </div>
+    </div>
+  }
+    
+    </>
   );
 };
 
