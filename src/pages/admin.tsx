@@ -15,15 +15,11 @@ interface CustomUser extends User {
 function Admin() {
   const [user] = useAuthState(auth) as unknown as [CustomUser | null];
   const router = useRouter();
-  // console.log(user);
 
   useEffect(() => {
     const userSession = typeof window !== 'undefined' ? sessionStorage.getItem('accessToken') : null;
     const token = sessionStorage.getItem('accessToken');
-    const userToken = user?.stsTokenManager?.accessToken;
-    console.log(userToken );
-    if (!token) {
-      
+    if (!user && !token) {
       router.push('/signIn');
     }
   }, [user, router]);

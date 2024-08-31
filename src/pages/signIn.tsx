@@ -5,7 +5,12 @@ import { auth } from '@/utils/firebase/config';
 import { useRouter } from 'next/navigation';
 import { User } from 'firebase/auth';
 import { ClipLoader } from 'react-spinners';
-
+import { useAuthState } from 'react-firebase-hooks/auth';
+interface CustomUser extends User {
+  stsTokenManager: {
+    accessToken: string;
+  };
+}
 const SignIn = () => {
   const [formState, setFormState] = useState({
     email: '',
@@ -15,16 +20,10 @@ const SignIn = () => {
   });
 
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-  const router = useRouter();
   const [userToken , setUserToken] = useState<string | null>(null);
+  const [user] = useAuthState(auth) as unknown as [CustomUser | null];
+  const router = useRouter();
 
-  useEffect(() => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    if (accessToken) {
-      setUserToken(accessToken);
-     
-    }
-  }, [router]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -55,7 +54,7 @@ const SignIn = () => {
   <>
 
   {
-    !userToken ? 
+    user === null ? 
     <div className="min-h-screen flex items-center justify-center bg-greenDark">
       <div className="bg-gray-800 p-10 rounded-lg shadow-xl w-96">
         <h1 className="text-white text-2xl mb-5">Sign In</h1>
