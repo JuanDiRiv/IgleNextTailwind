@@ -11,13 +11,13 @@ import FooterComponent from '@/components/FooterComponent/FooterComponent'
 
 
 function Home() {
-  const url = "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Frioscajica%2Fvideos%2F505356845192472%2F&show_text=false&width=560&t=0"
+
   return (
     <>
       <Head>
         <title> Rios Cajica - Home</title>
       </Head>
-      <header className='bg-[url("https://hosting.renderforestsites.com/images/5699226/135134/284fbfc4cc2e05fb0fe23adc053ac610.jpg")] bg-center bg-cover  '>
+      <header className='bg-[url("https://hosting.renderforestsites.com/images/5699226/135134/284fbfc4cc2e05fb0fe23adc053ac610.jpg")] bg-center bg-cover '>
         {/* Contenido del header */}
         <Navbar />
         <div className='pt-12 lg:pt-0'>
@@ -39,7 +39,7 @@ function Home() {
       </header>
       <main >
         <div className='bg-greenDark p-4 pt-10 pb-10 h-full md:p-16 lg:p-32 text-lg  '>
-          <VideoDisplay url={url} />
+          <VideoDisplay  />
         </div>
         <div className='bg-customGray text-lg '>
           <About />

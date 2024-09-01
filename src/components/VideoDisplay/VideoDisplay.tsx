@@ -6,9 +6,7 @@ import { LiaPlaceOfWorshipSolid } from "react-icons/lia";
 import { db } from '@/utils/firebase/config';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
-interface VideoDisplayProps {
-  url: string;
-}
+
 
 interface VideoData {
   id: string;
@@ -36,7 +34,7 @@ function useFetchVideos() {
   return videoList;
 }
 
-function VideoDisplay({ url }: VideoDisplayProps) {
+function VideoDisplay() {
   const videoList = useFetchVideos();
 
   const lastVideo = useMemo(() => videoList[videoList.length - 1], [videoList]);

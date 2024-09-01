@@ -82,7 +82,7 @@ function VideoPost() {
             
         };
         fetchVideos();
-    }, []);
+    }, [videoList]);
 
     useEffect(() => {
         const userSession = typeof window !== 'undefined' ? sessionStorage.getItem('accessToken') : null;
