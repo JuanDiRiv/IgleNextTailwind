@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/utils/firebase/config';
+import { auth, db } from '@/utils/firebase/config';
 import { User } from 'firebase/auth'; // Adjust the import according to your setup
 import { signOut } from 'firebase/auth';
 import Layout from '@/components/layout/Layout';
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import toast, { Toaster } from 'react-hot-toast';
 
 // Extend the User type to include stsTokenManager
 interface CustomUser extends User {
@@ -12,16 +14,75 @@ interface CustomUser extends User {
         accessToken: string;
     };
 }
+interface VideoData {
+    id: string;
+    link: string;
+    title: string;
+    description: string;
+    meetingDateTime: string;
+    isLive: boolean;
+}
 
 function VideoPost() {
     const [user] = useAuthState(auth) as unknown as [CustomUser | null];
     const router = useRouter();
+    const [confirmationMessage, setConfirmationMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const [link, setLink] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [meetingDateTime, setMeetingDateTime] = useState('');
     const [isLive, setIsLive] = useState(false);
+    const [newVideo, setNewVideo] = useState(null);
+    const [videoList, setVideoList] = useState<VideoData[]>([]);
+
+    const createVideo = async (video: any) => {
+        setLoading(true);
+        try {
+            await addDoc(collection(db, 'VideoTransmition'), video);
+            setNewVideo(video);
+            setConfirmationMessage('El Video se ha creado correctamente');
+            toast.success('El Video se ha creado correctamente');
+            resetForm();
+
+            // Hide the confirmation message and image after 3 seconds
+            setTimeout(() => {
+                setConfirmationMessage("");
+                setNewVideo(null);
+            }, 3000);
+        } catch (error: any) {
+            if (error.code === 'permission-denied') {
+                setConfirmationMessage('Error: Permisos insuficientes para crear el video.');
+                toast.error('Error: Permisos insuficientes para crear el video.');
+            } else {
+                setConfirmationMessage('Error creando el video: ' + error.message);
+                toast.error('Error creando el video: ' + error.message);
+            }
+            console.error('Error creando el video: ', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const resetForm = () => {
+        setLink('');
+        setTitle('');
+        setDescription('');
+        setMeetingDateTime('');
+        setIsLive(false);
+    }
+
+    useEffect(() => {
+        const fetchVideos = async () => {
+            const querySnapshot = await getDocs(collection(db, "VideoTransmition"));
+            const videoList = querySnapshot.docs.map(doc => doc.data() as VideoData);
+            setVideoList(videoList);
+            
+            
+        };
+        fetchVideos();
+    }, []);
 
     useEffect(() => {
         const userSession = typeof window !== 'undefined' ? sessionStorage.getItem('accessToken') : null;
@@ -33,15 +94,29 @@ function VideoPost() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log({ link, title, description, meetingDateTime, isLive });
+        const srcMatch = link.match(/src="([^"]+)"/);
+        const srcValue = srcMatch ? srcMatch[1] : '';
+        const normalizedData = {
+            id: videoList.length + 1,
+            link: srcValue,
+            title,
+            description,
+            meetingDateTime,
+            isLive
+        }
+        createVideo(normalizedData);
     };
 
     return (
         <Layout>
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4 relative">
                 <h1 className="text-2xl font-bold mb-4">Welcome to the Admin VideoPost</h1>
-                <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-8 rounded shadow-md">
+                <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-8 rounded shadow-md relative">
+                    {loading && (
+                        <div className="absolute inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-10">
+                            <div className="w-16 h-16 border-4 border-t-4 border-t-blue-500 border-gray-200 rounded-full animate-spin"></div>
+                        </div>
+                    )}
                     <div className="mb-4">
                         <label htmlFor="link" className="block text-gray-700 text-sm font-bold mb-2">
                             Video Link
@@ -118,13 +193,10 @@ function VideoPost() {
                         </button>
                     </div>
                 </form>
+                <Toaster />
             </div>
         </Layout>
     );
 }
 
 export default VideoPost;
-
-
-
-//<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Frioscajica%2Fvideos%2F3741656622719396%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
